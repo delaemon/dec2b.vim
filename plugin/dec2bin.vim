@@ -1,25 +1,31 @@
-function! Dec2bin(d, ...)
-    let n = a:d / 2
-    let r = a:d % 2 == 0 ? 0 : 1
-    if n > 0
-        let t = a:0 > 0 ? a:1 : ""
-        return Dec2bin(n, r.t)
-    endif
-    let t = a:0 > 0 ? a:1 : ""
-    let l = strlen(r.t)
-    let m = l + (l % 4 > 0 ? 4 - l % 4 : 0)
-    let f = "%0".m."d"
-    let b = printf(f, r.t)
-    return b
+function! Dec2bin(d)
+    let b = ""
+    let i = a:d
+    while i / 2 > 0
+        let b = (i % 2 == 0 ? "0" : "1") . b
+        let i = i / 2
+    endwhile
+    let b = (i % 2 == 0 ? "0" : "1") . b
+    let l = strlen(b)
+    let m = l % 4 > 0 ? 4 - l % 4 : 0
+    let j = 0
+    let z = ""
+    while j < m
+        let z = z . "0"
+        let j += 1
+    endwhile
+    let f = z . "%s"
+    return printf(f, b)
 endfunction
 
 function! Dec2binPrint(d)
-    :echom Dec2bin(a:d)
+    :echom a:d . " == " . Dec2bin(a:d)
 endfunction
 
 function! Dec2binReplace(d)
-    :let b = Dec2bin(a:d)
-    :let line = getline(".")
-    :let repl = substitute(line, a:d, b, "")
-    :call setline(".", repl)
+    let b = Dec2bin(a:d)
+    let line = getline(".")
+    let repl = substitute(line, a:d, b, "")
+    call setline(".", repl)
+    echom a:d . " -> " . b
 endfunction
