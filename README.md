@@ -1,6 +1,6 @@
 # dec2bin.vim
 ###Description
-The dec2bin.vim plug-in can convert decimal to binary number.
+The dec2bin.vim plug-in can convert decimal to binary number literal.
 
 ###Install
 Example that uses vim-plug.
@@ -13,6 +13,8 @@ call plug#end()
 ###Usage
 dec2bin.vimrc
 ```
-nnoremap <silent> ;b :call Dec2binPrint(<C-r><C-w>)<CR>
-nnoremap <silent> ;bi :call Dec2binReplace(<C-r><C-w>)<CR>
+nnoremap <silent> ;b    :call Dec2binPrint(<C-r><C-w>)<CR>
+nnoremap <silent> ;bp   :call Dec2binPrintPad(<C-r><C-w>)<CR>
+nnoremap <silent> ;bi   :call Dec2binReplace(<C-r><C-w>)<CR>
+nnoremap <silent> ;bip  :call Dec2binReplacePad(<C-r><C-w>)<CR>
 ```
