@@ -2,6 +2,8 @@
 ###Description
 The dec2bin.vim plug-in can convert decimal to binary number literal.
 
+<img src="https://raw.githubusercontent.com/wiki/delaemon/dec2bin.vim/image/usage.gif">
+
 ###Install
 Example that uses vim-plug.
 ```.vimrc
