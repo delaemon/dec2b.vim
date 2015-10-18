@@ -57,3 +57,41 @@ function! Dec2binReplacePad(d)
     call setline(".", repl)
     echom a:d . " -> " . bf
 endfunction
+
+function! Bin2dec(b)
+    if a:b[0:1] != "0b"
+        echom "invalid binary number literal."
+        return
+    endif
+    let i = strlen(a:b) - 1
+    let d = a:b[i]
+    let i -= 1
+    let t = 1
+    while i > 1
+        let d = d + a:b[i] * t * 2
+        let t = t * 2
+        let i -= 1
+    endwhile
+    return d
+endfunction
+
+function! Bin2decPrint(b)
+    let d = Bin2dec(a:b)
+    echom a:b . " == " . d
+endfunction
+
+function! Bin2decReplace(b)
+    let d = Bin2dec(a:b)
+    let line = getline(".")
+    let repl = substitute(line, a:b, d, "")
+    call setline(".", repl)
+    echom a:b . " -> " . d
+endfunction
+
+function! Dec2binToggle(n)
+    if a:n[0:1] == "0b"
+        call Bin2decReplace(a:n)
+    else
+        call Dec2binReplace(a:n)
+    endif
+endfunction
